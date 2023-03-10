@@ -18,10 +18,11 @@ public class UserDaoImpl implements UserDao {
         users.add(user3);
     }
 
+
     @Override
-    public User getUserByName(String name) {
+    public User getUserByName(User name) {
         for (User user : users) {
-            if (user.getName().equals(name)){
+            if (user.getName().equals(name.getName())){
                 return user;
             }
         }

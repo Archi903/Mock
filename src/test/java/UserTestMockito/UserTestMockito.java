@@ -1,5 +1,6 @@
 package UserTestMockito;
 
+import org.example.DAO.Impl.UserDaoImpl;
 import org.example.DAO.UserDao;
 import org.example.Service.Impl.UserServiceImpl;
 import org.example.User;
@@ -12,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -31,16 +32,14 @@ class UserServiceImplTest {
     @Test
     void shouldReturnFalse() {
         when(userDao.findAllUsers()).thenReturn(users);
-
-        Assertions.assertEquals(users, userDao.findAllUsers());
         Assertions.assertFalse(userService.checkUserExist(INCORRECT_NAME));
+        verify(userDao, times(1)).findAllUsers();
     }
 
     @Test
     void shouldReturnTrue() {
         when(userDao.findAllUsers()).thenReturn(users);
-
-        Assertions.assertEquals(users, userDao.findAllUsers());
         Assertions.assertTrue(userService.checkUserExist(CORRECT_NAME));
+        verify(userDao, times(1)).findAllUsers();
     }
 }
